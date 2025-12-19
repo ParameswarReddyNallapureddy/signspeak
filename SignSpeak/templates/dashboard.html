@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>SignSpeak Dashboard</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+    margin:0;
+    font-family:'Segoe UI',sans-serif;
+    background:linear-gradient(120deg,#141e30,#243b55);
+    color:white;
+}
+.header{
+    padding:20px;
+    font-size:22px;
+    text-align:center;
+}
+.container{
+    max-width:900px;
+    margin:auto;
+    padding:30px;
+}
+.card{
+    background:rgba(255,255,255,0.12);
+    backdrop-filter:blur(10px);
+    border-radius:16px;
+    padding:25px;
+    margin-bottom:25px;
+}
+.buttons{
+    display:flex;
+    gap:20px;
+    justify-content:center;
+}
+button{
+    padding:14px 28px;
+    border:none;
+    border-radius:10px;
+    font-size:16px;
+    cursor:pointer;
+}
+.start{background:#00f2fe;}
+.stop{background:#ff4b2b;color:white;}
+.sentence{
+    font-size:20px;
+    min-height:40px;
+    margin-top:15px;
+    color:#00f2fe;
+}
+.footer{
+    text-align:center;
+    opacity:0.6;
+    font-size:13px;
+}
+.logout{
+    position:absolute;
+    right:20px;
+    top:20px;
+    color:white;
+    text-decoration:none;
+}
+.profile-icon{
+    position:absolute;
+    top:20px;
+    right:20px;
+    font-size:22px;
+    text-decoration:none;
+    background:rgba(255,255,255,0.15);
+    padding:8px 12px;
+    border-radius:50%;
+    backdrop-filter:blur(8px);
+    color:white;
+}
+.profile-icon:hover{
+    background:#4dc2f6;
+    color:#0d1a26;
+}
+
+</style>
+</head>
+
+<body>
+<a href="/profile" class="profile-icon">👤</a>
+
+
+
+<div class="header">SignSpeak • AI Dashboard</div>
+
+<div class="container">
+
+<div class="card">
+<h3>Sign to Sentence Module</h3>
+<p>Launch or stop the real-time sign language translator.</p>
+
+
+<div class="buttons">
+    <!-- <button class="start" onclick="startCamera()">▶ Launch Translator</button>
+    <button class="stop" onclick="stopCamera()">⏹ Stop Translator</button> -->
+<button onclick="window.location.href='/sign_to_text'">✋ Sign → Text</button>
+ <button onclick="goText()">📝 Text → Sign</button>
+    <!-- <button class="stop" onclick="stopCamera()">⏹ Stop Translator</button>  -->
+    <!-- <button onclick="window.location.href='/paint">notepad</button> -->
+<!-- Profile Icon -->
+</div>
+<script>
+function startSign() {
+    fetch("/launch_camera")
+        .then(res => res.text())
+        .then(data => {
+            console.log(data);
+            alert("Camera launched successfully");
+        })
+        .catch(err => alert("Failed to start camera"));
+}
+
+function goText(){
+      window.location.href = "/text_to_sign";
+}
+// function stopCamera() {
+//     fetch("/stop_camera")
+//         .then(res => res.text())
+//         .then(data => {
+//             console.log(data);
+//             alert("Camera stopped");
+//         });
+// }
+</script>
+
+
+</body>
+</html>

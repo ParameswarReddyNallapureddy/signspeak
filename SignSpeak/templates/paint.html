@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Paint Panel</title>
+<style>
+body{margin:0;background:#0d1a26;color:white;font-family:sans-serif}
+canvas{border:2px solid #4dc2f6;display:block;margin:20px auto;}
+button{padding:10px 20px;margin:5px;}
+</style>
+</head>
+<body>
+
+<h2 style="text-align:center">🎨 Paint Panel</h2>
+
+<canvas id="paint" width="600" height="400"></canvas>
+
+<div style="text-align:center">
+<button onclick="clearCanvas()">Clear</button>
+<a href="/dashboard"><button>Back</button></a>
+<a href="/profile" class="profile-icon">👤</a>
+
+</div>
+
+<script>
+const canvas = document.getElementById("paint");
+const ctx = canvas.getContext("2d");
+let drawing=false;
+
+canvas.onmousedown=()=>drawing=true;
+canvas.onmouseup=()=>drawing=false;
+canvas.onmousemove=e=>{
+  if(!drawing) return;
+  ctx.fillStyle="#4dc2f6";
+  ctx.beginPath();
+  ctx.arc(e.offsetX,e.offsetY,3,0,Math.PI*2);
+  ctx.fill();
+};
+
+function clearCanvas(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+}
+</script>
+
+</body>
+</html>

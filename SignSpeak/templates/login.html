@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>SignSpeak Login</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+  background:#0f172a;
+  color:white;
+  font-family:Arial;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+.card{
+  background:rgba(255,255,255,0.12);
+  backdrop-filter:blur(12px);
+  padding:40px;
+  border-radius:16px;
+  width:320px;
+  text-align:center;
+}
+input{
+  width:100%;
+  padding:12px;
+  margin:10px 0;
+  border-radius:6px;
+  border:none;
+}
+.pass-box{position:relative;}
+.eye{
+  position:absolute;
+  right:12px;
+  top:50%;
+  transform:translateY(-50%);
+  cursor:pointer;
+}
+button{
+  width:100%;
+  padding:12px;
+  background:#22c55e;
+  border:none;
+  border-radius:8px;
+  font-size:16px;
+  cursor:pointer;
+}
+.link{
+  margin-top:10px;
+  color:#38bdf8;
+  cursor:pointer;
+}
+#error{color:#f87171;margin-top:8px;}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+<h2>SignSpeak Login</h2>
+
+<input type="email" id="email" placeholder="Email" required>
+
+<div class="pass-box">
+  <input type="password" id="password" placeholder="Password" required>
+  <span class="eye" onclick="togglePwd()">👁</span>
+</div>
+
+<button onclick="login()">Login</button>
+
+<div class="link" onclick="goSignup()">SignUp</div>
+<div id="error"></div>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword } 
+from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAIePK7Dq3WxdHMuMcsr2PN1iSWqnAVe2s",
+  authDomain: "signspeak-1a617.firebaseapp.com",
+  projectId: "signspeak-1a617",
+  storageBucket: "signspeak-1a617.firebasestorage.app",
+  messagingSenderId: "1025233411016",
+  appId: "1:1025233411016:web:cea5e5e6da4d081e107efd"
+};
+
+initializeApp(firebaseConfig);
+const auth = getAuth();
+
+window.login = function(){
+  signInWithEmailAndPassword(
+    auth,
+    email.value,
+    password.value
+  ).then(()=>{
+    window.location.href="/firebase_login";
+  }).catch(err=>{
+    document.getElementById("error").innerText = err.message;
+  });
+}
+
+window.goSignup = function(){
+  window.location.href="/signup";
+}
+
+window.togglePwd = function(){
+  const p = document.getElementById("password");
+  p.type = p.type === "password" ? "text" : "password";
+}
+</script>
+
+</body>
+</html>
